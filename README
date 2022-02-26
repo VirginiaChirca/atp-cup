@@ -1,0 +1,46 @@
+Cerinta 1
+Am creat o functie "void alocare_juc(Player **P, int m)" care sa aloce memorie pentru un vector de jucatori.
+Am creat o functie "Player citire_juc(FILE *f)" care sa citeasca din fisierul cu date de intrare informatille despre un jucator si sa returneze jucatorul.
+Functia "Country citire_tar(FILE *f)" am creat-o pentru citirea din fisier a informatiilor despre o tara. In interiorul ei, in functie de numarul de jucatori citit, am apelat functia de alocare_juc. Prin apelul functiei citire_juc am pus in campul corespunzator din tara informatiile despre fiecare jucator in parte.
+Am creat functia "void addEnd(Node **head, Country info_tara)" cu scopul adaugarii la finalul listei dublu inlantuita circulara un nou nod de tip Country.
+Functia afisare am realizat-o pentru afisarea numelor tarilor aflate in lista.(am apelat-o in main)
+
+Cerinta 2
+Am creat o functie "int power(int n)" care sa-mi verifice daca un numar este sau nu putere a lui 2.
+In interiorul functiei "float score_initial(Country c)" am calculat media aritmetica pentru scorurile jucatorilor unei tari si am returnat-o.
+In functia "Node *minimal(Node **head)" am parcurs lista si am returnat nodul care contine tara cu cel mai mic scor initial.
+Functia "void sterg_nod(Node **head, Node *adr)" imi sterge un nod din lista dat prin adresa sa.
+In functia "void modific(Node **head, int *nr_teams, char *nume)"(apelata in main) deschid din nou fisierul pentru scriere. Cat timp functia power(nr tarilor din lista) nu returneaza 1, apelez functia minimal si nodul returnat il sterg, imediat decrementez numarul de tari.Tot in aceasta functie apelez afisare ptr numelor de tari aflate in lista dupa stergere si inchid fisierul.
+ 
+Cerinta 3
+Am implementat structura pentru stiva.
+Am creat functia "void push(Node_stiva **top, Country info_tara)" pentru a adauaga element in stiva.
+Am creat functia "int isEmpty(Node_stiva *top)" pentru verificarea daca stiva este goala.
+Am creat functia "Country pop(Node_stiva **top)" pentru a scoate un element dintr-o stiva si a-l intoarce.
+In functia "void stiva_tari(Node_stiva **top, Node *head)" am parcurs lista si prin push am adaugat tara cu tara in stiva.
+Functia "void afisare_stiva(Node_stiva **top)" imi afiseaza numele tarilor pe care le-am introdus in stiva.
+Am implementat o structura Meci care sa-mi retina date despre 2 jucatori.
+Am implementat structura pentru coada si am creat urmatoarele functii pentru crearea, adaugarea unui element, verficarea daca este goala, scoaterea unui element:Queue* createQueue(), void enQueue(Queue*q, Meci new_game), int isEmpty_coada(Queue*q), Meci deQueue(Queue*q).
+Functia "Country scor_maxim(Country tara1, Country tara2)" gaseste care dintre jucatorii a 2 tari are cel mai mare scor personal si imi returneaza tara jucatorului respectiv.
+In functia "void creare_coada_meciuri(Queue**q, int *scor_local1, int *scor_local2, Country *tara1, Country *tara2)" parcurg vectorii de jucatori ai celor 2 tari, ii introduc conform cerintei cate 2 intr-un nod al cozii, si prin comparatiile necesare a scorurile lor personale modific scorul personal al jucatorului si local al tarii, pentru urmatorul nod ce urmeaza a fi adaugat.
+In functia "void stiva_castigator(Node_stiva **Winner,int scor_local1,int scor_local2,Country *tara1, Country *tara2) compar scorurile locale ale 2 tari in urma unei confruntari si gasesc tara castigatoare introducand-o in stiva Winner.
+In functia "void tari_castigatoare(Node_stiva **top, Node_stiva **Winner, FILE *g, int nr_teams, Country **ultime)" imi descarc stiva Winner si pun elementele ei in stiva initiala.Tot aici printez in fisier numele tarilor castigatoare. Parametrul "*ultime" este un vector de tari folositor la cerinta 4, ca sa-mi retina ultimele 4 tari ramase in turneu cu scorurile lor finale.
+In functia "void afisare_meciuri(Node_stiva **top, int *nr_teams, int *k, FILE *g,Country **ultime)" am apelat functiile de mai sus, am fcaut afisarile necesare, si prin dequeue am descarcat coada de meciuri la fiecare confruntare intre 2 tari. Atata timp cat stiva mea initiala dupa iesirea din while si introducerea tarilor castigatoare nu devenea goala si avea mai mult de un element apelam recursiv afisare_meciuri.
+In main am alocat memorie cu functia "void alocare_tari(Country **C, int n)" pentru vectorul *ultime,format din 4 tari si am deschis fiesierul pentru adaugare, apeland functia de afisare_meciuri.
+
+Cerinta 4
+Am implementat structura pentru BST.
+Am creat urmatoarele functii pentru adaugarea unui element si crearea arborelui de jucatori:Node_BST* newNode_arbore(Player juc_nou),Node_BST* insert(Node_BST* node, Player juc_nou), void creare_arbore(Node_BST **root, Country*ultime).
+Functia "void afisare_descrescator(Node_BST *root,FILE *g)" am creat-o pentru a parcurge arborele si a afisa jucatorii intr-o ordine descrescatoare in fct de scor.
+In main am apelat functia de creare arbore si functia anterioara.
+
+Cerinta 5
+Folosind functia "Node_BST* search(Node_BST* root, Player cautat)" am facut o cautare in arbore a jucatorului "cautat".In caz de nu-l gaseam se returna NULL.
+Functia "void numarare(Node_BST *root, Player dat1, Player dat2, int *nr, FILE *g)" are ca parametrii ce doi jucatori cititi din cerinte.in si va numara cati jucatorii se afla scu scorul intre scorurile date.
+Functia void ultima_cerinta(Node_BST*root, Player dat1, Player dat2, FILE *g,int*nr) verfica existenta cu search a jucatorilor, iar daca ii gaseste in arbore apeleaza functia de numarare in functie de ordinea scorurilor celor doi jucatori dati. Am apelat-o in main si in cazul in care nr a iesit diferit de 0 l-am afisat.
+
+Informatii main
+In main mi-am creat vectorul int *v, folosind datele din fisierul de cerinte. In functie de valoarea fiecarui element al vectorului s-au realzat cerintele de mai sus. Can am  ajunf la cerinta 5 am citit in 2 structuri de tip Player (dat1,dat2) datele despre jucatorii dati.Tot in main am deschis si inchis fisierul date.out (pentru adaugare ptr cerintele 3,4,5).
+
+
+
